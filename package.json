@@ -1,0 +1,75 @@
+{
+  "name": "@everyonesoftware/vscode-typescript",
+  "displayName": "VS Code TypeScript Base Types",
+  "description": "A collection of base types for making VS Code extensions.",
+  "publisher": "everyonesoftware",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/everyonesoftware/vscode-typescript"
+  },
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "module": "outputs/package/index.esm.js",
+  "main": "outputs/package/index.js",
+  "types": "outputs/package/index.d.ts",
+  "files": [
+    "outputs/package/",
+    "CHANGELOG.md",
+    "LICENSE.md",
+    "package.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && eslint sources tests --ext ts --max-warnings 0 && node package.js",
+    "clean": "rimraf outputs",
+    "just-integration-tests": "c8 vscode-test",
+    "test": "npm run build && npm run just-integration-tests"
+  },
+  "dependencies": {
+    "@everyonesoftware/base-typescript": "28.0.0"
+  },
+  "devDependencies": {
+    "@everyonesoftware/test-typescript": "15.0.0",
+    "@everyonesoftware/mocha-typescript": "7.0.0",
+    "@types/node": "20.14.0",
+    "@types/vscode": "1.83.0",
+    "@typescript-eslint/eslint-plugin": "7.12.0",
+    "@typescript-eslint/parser": "7.12.0",
+    "@vscode/test-cli": "0.0.9",
+    "@vscode/test-electron": "2.4.0",
+    "@vscode/vsce": "2.26.1",
+    "c8": "9.1.0",
+    "esbuild": "0.21.4",
+    "eslint": "8.57.0",
+    "npm-dts": "1.3.12",
+    "source-map-support": "0.5.21",
+    "typescript": "5.7.2",
+    "rimraf": "6.0.1"
+  },
+  "mocha": {
+      "color": true,
+      "ui": "tdd",
+      "spec": "./outputs/tests/unit/**/*.js",
+      "extension": [
+          "js"
+      ],
+      "require": [
+          "source-map-support/register"
+      ]
+  },
+  "c8": {
+    "all": true,
+    "src": ["sources", "tests"],
+    "temp-directory": "outputs/coverage-temp",
+    "report-dir": "outputs/coverage",
+    "reporter": [
+      "lcov"
+    ]
+  }
+}
